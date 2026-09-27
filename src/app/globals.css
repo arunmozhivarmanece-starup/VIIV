@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* VIIV design tokens                                                  */
+/* ------------------------------------------------------------------ */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Neutrals */
+  --color-ink: #0b0c11;
+  --color-ink-2: #14161e;
+  --color-ink-3: #1e212b;
+  --color-ink-line: #2a2e3a;
+  --color-paper: #faf8f4;
+  --color-sand: #f2eee6;
+  --color-line: #e3ded3;
+  --color-muted: #595c68;
+  --color-muted-dark: #a4a8b5;
+
+  /* Primary accent — VIIV saffron. Use `accent` for fills (with ink text)
+     and `accent-ink` for accent-coloured text on light backgrounds (AA). */
+  --color-accent: #ff6b1a;
+  --color-accent-soft: #ffe6d6;
+  --color-accent-ink: #b93d06;
+  --color-accent-bright: #ff8a4c;
+
+  /* Secondary accent — used sparingly */
+  --color-iris: #4f46e5;
+  --color-iris-soft: #e8e7fd;
+
+  --radius-card: 1.25rem;
+  --shadow-card: 0 1px 2px rgb(11 12 17 / 0.04), 0 8px 24px -12px rgb(11 12 17 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(11 12 17 / 0.05), 0 24px 48px -20px rgb(11 12 17 / 0.25);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-dash: dash 1.6s linear infinite;
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes dash {
+    to { stroke-dashoffset: -12; }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  /* Offset in-page anchors for the sticky navbar */
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  dialog::backdrop {
+    background: rgb(11 12 17 / 0.6);
+    backdrop-filter: blur(4px);
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
