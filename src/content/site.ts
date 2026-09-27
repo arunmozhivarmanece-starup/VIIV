@@ -1,3 +1,5 @@
+import { resolveSiteUrl } from "@/lib/siteUrl";
+
 /**
  * Brand, navigation and CTA configuration.
  * Everything customer-facing that is likely to change lives in /src/content.
@@ -10,7 +12,7 @@ export const site = {
   /** Legal / institutional name — shown only in the footer and legal pages. */
   legalName: "Varman Institute of Innovation & Venture Building",
   tagline: "Build Skills. Prove Skills. Launch Your Career.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://viiv.example",
+  url: resolveSiteUrl(),
   locale: "en_IN",
   seo: {
     title: "VIIV by Varman — Careers Beyond Coding | Full-Stack Sales Program",
